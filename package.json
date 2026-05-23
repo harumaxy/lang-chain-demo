@@ -1,0 +1,21 @@
+{
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:ai": "cd apps/ai && bun run dev",
+    "dev:front": "cd apps/front && bun run dev",
+    "start:cli": "cd apps/cli && bun run start",
+    "ingest": "cd apps/ai && bun -e \"import { ingestDocuments } from './src/rag/ingest.ts'; await ingestDocuments()\"",
+    "check:types:ai": "cd apps/ai && bunx tsc --noEmit",
+    "check:types:cli": "cd apps/cli && bunx tsc --noEmit",
+    "check:types:front": "cd apps/front && bunx tsc -b",
+    "check:types": "bun run check:types:ai && bun run check:types:cli && bun run check:types:front",
+    "check:biome": "bunx biome check .",
+    "check": "bun run check:types && bun run check:biome"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15"
+  }
+}
