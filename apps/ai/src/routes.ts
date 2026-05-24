@@ -57,10 +57,7 @@ const app = new Hono()
         await sseStream.writeSSE({
           data: JSON.stringify({
             type: "sources",
-            sources: sources.map((s) => ({
-              source: s.metadata.source,
-              content: s.pageContent.slice(0, 200),
-            })),
+            sources: sources.map((s) => ({ source: s })),
           }),
           event: "message",
         });
