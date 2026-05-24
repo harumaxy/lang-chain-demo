@@ -14,6 +14,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@hono/zod-validator": "^0.8.0",
     "@langchain/core": "^1.1.48",
     "@langchain/ollama": "^1.2.7",
     "@langchain/qdrant": "^1.0.3",
