@@ -21,8 +21,8 @@ export function Sources({ sources }: Props) {
       }}
     >
       <div style={{ fontWeight: "bold", marginBottom: "4px" }}>参照元:</div>
-      {sources.map((s, i) => (
-        <div key={i} style={{ marginBottom: "4px" }}>
+      {sources.map((s) => (
+        <div key={s.source} style={{ marginBottom: "4px" }}>
           {s.source}
         </div>
       ))}

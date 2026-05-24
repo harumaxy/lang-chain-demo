@@ -9,11 +9,7 @@
   },
   "linter": {
     "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noExplicitAny": "off",
-        "noArrayIndexKey": "off"
-      }
+      "recommended": true
     }
   }
 }

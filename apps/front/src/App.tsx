@@ -5,6 +5,7 @@ import { ChatMessage } from "./components/ChatMessage";
 import { Sources } from "./components/Sources";
 
 interface Message {
+  id: string;
   role: "user" | "assistant";
   content: string;
   sources?: { source: string; content: string }[];
@@ -20,10 +21,17 @@ export default function App() {
   }, []);
 
   async function handleSend(message: string) {
-    setMessages((prev) => [...prev, { role: "user", content: message }]);
+    setMessages((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), role: "user", content: message },
+    ]);
     setIsLoading(true);
 
-    setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+    const assistantId = crypto.randomUUID();
+    setMessages((prev) => [
+      ...prev,
+      { id: assistantId, role: "assistant", content: "" },
+    ]);
 
     try {
       let sources: { source: string; content: string }[] = [];
@@ -110,8 +118,8 @@ export default function App() {
             質問を入力してください（例: 「有給休暇の申請方法は？」）
           </p>
         )}
-        {messages.map((msg, i) => (
-          <div key={i}>
+        {messages.map((msg) => (
+          <div key={msg.id}>
             <ChatMessage role={msg.role} content={msg.content} />
             {msg.sources && <Sources sources={msg.sources} />}
           </div>

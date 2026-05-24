@@ -1,5 +1,6 @@
 import type { Document } from "@langchain/core/documents";
 import type { ToolCall } from "@langchain/core/messages/tool";
+import type { StructuredToolInterface } from "@langchain/core/tools";
 import { tool } from "@langchain/core/tools";
 import { ChatOllama } from "@langchain/ollama";
 import { Glob } from "bun";
@@ -54,7 +55,7 @@ const listDocuments = tool(
   },
 );
 
-const tools = [searchDocuments, listDocuments];
+const tools: StructuredToolInterface[] = [searchDocuments, listDocuments];
 
 const SYSTEM_PROMPT = `/no_think
 あなたはTechFlow株式会社の社内Q&Aアシスタントです。
@@ -139,8 +140,7 @@ export async function ragQuery(question: string): Promise<RagResult> {
       }
 
       // ツールを実行
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- tools配列のunion型でinvokeシグネチャが非互換のためanyで回避
-      const result = await (toolFn as any).invoke(toolCall.args);
+      const result = await toolFn.invoke(toolCall.args);
 
       // 参照元ドキュメントを記録（UIで「参照:」として表示するため）
       if (toolCall.name === "search_documents") {

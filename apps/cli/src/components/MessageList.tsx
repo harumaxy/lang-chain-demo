@@ -1,6 +1,7 @@
 import { Box, Text } from "ink";
 
 interface Message {
+  id: string;
   role: "user" | "assistant";
   content: string;
   sources?: { source: string; content: string }[];
@@ -13,8 +14,8 @@ interface Props {
 export function MessageList({ messages }: Props) {
   return (
     <Box flexDirection="column">
-      {messages.map((msg, i) => (
-        <Box key={i} flexDirection="column" marginBottom={1}>
+      {messages.map((msg) => (
+        <Box key={msg.id} flexDirection="column" marginBottom={1}>
           <Text bold color={msg.role === "user" ? "blue" : "green"}>
             {msg.role === "user" ? "You" : "AI"}:
           </Text>
