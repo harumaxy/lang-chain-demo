@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
-import { ChatMessage } from "./components/ChatMessage";
+import { streamChat } from "@lang-chain-demo/api-client";
+import { useEffect, useRef, useState } from "react";
 import { ChatInput } from "./components/ChatInput";
+import { ChatMessage } from "./components/ChatMessage";
 import { Sources } from "./components/Sources";
-import { streamChat } from "./lib/api";
 
 interface Message {
   role: "user" | "assistant";
@@ -17,7 +17,7 @@ export default function App() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, []);
 
   async function handleSend(message: string) {
     setMessages((prev) => [...prev, { role: "user", content: message }]);
@@ -54,14 +54,15 @@ export default function App() {
         }
         return updated;
       });
-    } catch (error) {
+    } catch (_error) {
       setMessages((prev) => {
         const updated = [...prev];
         const last = updated[updated.length - 1];
         if (last) {
           updated[updated.length - 1] = {
             ...last,
-            content: "エラーが発生しました。サーバーが起動しているか確認してください。",
+            content:
+              "エラーが発生しました。サーバーが起動しているか確認してください。",
           };
         }
         return updated;

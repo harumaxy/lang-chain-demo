@@ -14,6 +14,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@lang-chain-demo/api-client": "workspace:*",
     "hono": "^4.12.22",
     "ink": "^7.0.3",
     "ink-text-input": "^6.0.0",

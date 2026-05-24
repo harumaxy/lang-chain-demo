@@ -1,7 +1,7 @@
+import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { streamSSE } from "hono/streaming";
-import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { ragQuery } from "./rag/chain.ts";
 import { ingestDocuments } from "./rag/ingest.ts";
@@ -62,7 +62,7 @@ const app = new Hono()
           event: "message",
         });
       });
-    }
+    },
   );
 
 export default app;

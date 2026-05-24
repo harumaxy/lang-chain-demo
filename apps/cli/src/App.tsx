@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { streamChat } from "@lang-chain-demo/api-client";
 import { Box, Text } from "ink";
-import { MessageList } from "./components/MessageList.tsx";
+import { useState } from "react";
 import { Input } from "./components/Input.tsx";
-import { streamChat } from "./lib/api.ts";
+import { MessageList } from "./components/MessageList.tsx";
 
 interface Message {
   role: "user" | "assistant";
@@ -23,7 +23,8 @@ export function App() {
     try {
       let sources: { source: string; content: string }[] = [];
 
-      for await (const event of streamChat(input)) {
+      // @ts-expect-error Bun-specific option to prevent socket timeout during LLM thinking
+      for await (const event of streamChat(input, { timeout: 120_000 })) {
         if (event.type === "chunk") {
           setMessages((prev) => {
             const updated = [...prev];

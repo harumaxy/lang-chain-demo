@@ -1,0 +1,12 @@
+{
+  "name": "@lang-chain-demo/api-client",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^4.12.22"
+  }
+}

@@ -1,6 +1,6 @@
 import { serve } from "bun";
-import app from "./routes.ts";
 import { ingestDocuments } from "./rag/ingest.ts";
+import app from "./routes.ts";
 
 const port = 3000;
 
@@ -11,6 +11,7 @@ console.log(`Ingested ${count} chunks`);
 serve({
   fetch: app.fetch,
   port,
+  idleTimeout: 20,
 });
 
 console.log(`Server running at http://localhost:${port}`);

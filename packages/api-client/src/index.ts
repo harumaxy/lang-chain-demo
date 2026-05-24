@@ -1,5 +1,5 @@
 import { hc } from "hono/client";
-import type { AppType } from "../../../ai/src/routes.ts";
+import type { AppType } from "../../../apps/ai/src/routes.ts";
 
 export const client = hc<AppType>("http://localhost:3000");
 
@@ -16,14 +16,14 @@ export interface ChatSources {
 export type ChatEvent = ChatChunk | ChatSources;
 
 export async function* streamChat(
-  message: string
+  message: string,
+  options?: RequestInit,
 ): AsyncGenerator<ChatEvent> {
   const res = await fetch("http://localhost:3000/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message }),
-    // @ts-expect-error Bun-specific option to prevent socket timeout during LLM thinking
-    timeout: 120_000,
+    ...options,
   });
 
   if (!res.ok) throw new Error(`API error: ${res.status}`);

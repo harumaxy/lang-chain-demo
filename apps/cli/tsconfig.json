@@ -18,7 +18,10 @@
     "noImplicitOverride": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+    "paths": {
+      "@lang-chain-demo/api-client": ["../../packages/api-client/src/index.ts"]
+    }
   },
   "include": ["src/**/*.tsx", "src/**/*.ts"]
 }

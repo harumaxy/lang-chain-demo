@@ -1,10 +1,10 @@
-import { ChatOllama } from "@langchain/ollama";
-import { tool } from "@langchain/core/tools";
-import { z } from "zod";
 import type { Document } from "@langchain/core/documents";
 import type { ToolCall } from "@langchain/core/messages/tool";
-import { getVectorStore } from "./vectorstore.ts";
+import { tool } from "@langchain/core/tools";
+import { ChatOllama } from "@langchain/ollama";
 import { Glob } from "bun";
+import { z } from "zod";
+import { getVectorStore } from "./vectorstore.ts";
 
 const llm = new ChatOllama({
   model: "qwen3:8b",
@@ -29,7 +29,7 @@ const searchDocuments = tool(
     schema: z.object({
       query: z.string().describe("検索クエリ（例: 有給休暇の申請方法）"),
     }),
-  }
+  },
 );
 
 const listDocuments = tool(
@@ -51,7 +51,7 @@ const listDocuments = tool(
     description:
       "利用可能な社内ドキュメントの一覧を返します。どのようなドキュメントがあるか、カテゴリを知りたい場合に使ってください。",
     schema: z.object({}),
-  }
+  },
 );
 
 const tools = [searchDocuments, listDocuments];
@@ -139,7 +139,8 @@ export async function ragQuery(question: string): Promise<RagResult> {
       }
 
       // ツールを実行
-      const result = await toolFn.invoke(toolCall.args);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- tools配列のunion型でinvokeシグネチャが非互換のためanyで回避
+      const result = await (toolFn as any).invoke(toolCall.args);
 
       // 参照元ドキュメントを記録（UIで「参照:」として表示するため）
       if (toolCall.name === "search_documents") {

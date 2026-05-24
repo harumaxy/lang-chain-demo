@@ -1,9 +1,9 @@
-import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import { Document } from "@langchain/core/documents";
 import { QdrantVectorStore } from "@langchain/qdrant";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import { Glob } from "bun";
 import { embeddings } from "./embeddings.ts";
 import { COLLECTION_NAME } from "./vectorstore.ts";
-import { Document } from "@langchain/core/documents";
-import { Glob } from "bun";
 
 export async function ingestDocuments(): Promise<number> {
   const glob = new Glob("*.md");
@@ -17,7 +17,7 @@ export async function ingestDocuments(): Promise<number> {
       new Document({
         pageContent: content,
         metadata: { source: path },
-      })
+      }),
     );
   }
 
@@ -29,15 +29,13 @@ export async function ingestDocuments(): Promise<number> {
 
   const splits = await splitter.splitDocuments(documents);
 
-  const vectorStore = await QdrantVectorStore.fromDocuments(
-    splits,
-    embeddings,
-    {
-      url: "http://localhost:6333",
-      collectionName: COLLECTION_NAME,
-    }
-  );
+  await QdrantVectorStore.fromDocuments(splits, embeddings, {
+    url: "http://localhost:6333",
+    collectionName: COLLECTION_NAME,
+  });
 
-  console.log(`Ingested ${splits.length} chunks from ${documents.length} files`);
+  console.log(
+    `Ingested ${splits.length} chunks from ${documents.length} files`,
+  );
   return splits.length;
 }

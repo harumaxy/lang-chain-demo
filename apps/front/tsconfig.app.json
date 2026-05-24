@@ -19,7 +19,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@lang-chain-demo/api-client": ["../../packages/api-client/src/index.ts"]
+    }
   },
   "include": ["src"]
 }
