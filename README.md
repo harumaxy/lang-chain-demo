@@ -20,11 +20,11 @@ LangChain.jsを使ったRAG（Retrieval Augmented Generation）のデモアプ�
 ### 1. Ollamaモデルの準備
 
     ollama pull qwen3:8b
-    ollama pull nomic-embed-text
+    ollama pull bge-m3
 
 ### 2. Qdrantの起動
 
-    docker run -d --name qdrant -p 6333:6333 qdrant/qdrant
+    docker compose up -d
 
 ### 3. 依存関係のインストール
 
@@ -51,7 +51,7 @@ LangChain.jsを使ったRAG（Retrieval Augmented Generation）のデモアプ�
 | ランタイム | Bun |
 | APIサーバー | Hono + Hono RPC |
 | LLM | Ollama (qwen3:8b) |
-| エンベディング | Ollama (nomic-embed-text) |
+| エンベディング | Ollama (bge-m3) |
 | ベクトルストア | Qdrant |
 | RAGフレームワーク | LangChain.js |
 | フロントエンド | React + Vite |
