@@ -39,8 +39,15 @@ const app = new Hono()
       const { stream, sources } = await ragQuery(message);
 
       return streamSSE(c, async (sseStream) => {
+        let started = false;
         for await (const chunk of stream) {
-          if (!chunk) continue;
+          if (!chunk) {
+            if (!started) {
+              await sseStream.writeSSE({ data: "", event: "ping" });
+            }
+            continue;
+          }
+          started = true;
           await sseStream.writeSSE({
             data: JSON.stringify({ type: "chunk", content: chunk }),
             event: "message",

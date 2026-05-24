@@ -22,6 +22,8 @@ export async function* streamChat(
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message }),
+    // @ts-expect-error Bun-specific option to prevent socket timeout during LLM thinking
+    timeout: 120_000,
   });
 
   if (!res.ok) throw new Error(`API error: ${res.status}`);

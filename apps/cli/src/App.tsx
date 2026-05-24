@@ -49,14 +49,15 @@ export function App() {
         }
         return updated;
       });
-    } catch {
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
       setMessages((prev) => {
         const updated = [...prev];
         const last = updated[updated.length - 1];
         if (last) {
           updated[updated.length - 1] = {
             ...last,
-            content: "エラー: サーバーに接続できません",
+            content: `エラー: ${errorMessage}`,
           };
         }
         return updated;
