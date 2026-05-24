@@ -2,6 +2,7 @@ import { ChatOllama } from "@langchain/ollama";
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
 import type { Document } from "@langchain/core/documents";
+import type { ToolCall } from "@langchain/core/messages/tool";
 import { getVectorStore } from "./vectorstore.ts";
 import { Glob } from "bun";
 
@@ -82,7 +83,7 @@ export async function ragQuery(question: string): Promise<RagResult> {
   const messages: Array<
     | { role: "system"; content: string }
     | { role: "user"; content: string }
-    | { role: "assistant"; content: string; tool_calls?: any[] }
+    | { role: "assistant"; content: string; tool_calls?: ToolCall[] }
     | { role: "tool"; content: string; tool_call_id: string }
   > = [
     { role: "system", content: SYSTEM_PROMPT },
