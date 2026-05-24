@@ -90,16 +90,17 @@ export async function ragQuery(question: string): Promise<RagResult> {
     { role: "user", content: question },
   ];
 
-  // Agent loop: let the LLM call tools until it produces a final answer
+  // Agentループ: LLMがツール呼び出しをやめて最終回答を返すまで繰り返す
   const usedSources = new Set<string>();
   const maxIterations = 5;
 
   for (let i = 0; i < maxIterations; i++) {
+    // LLMに現在のメッセージ履歴を渡して応答を取得
     const response = await llmWithTools.invoke(messages);
 
     if (!response.tool_calls || response.tool_calls.length === 0) {
-      // No tool calls = final answer, stream it
-      // Re-invoke with streaming for the final response
+      // ツール呼び出しなし = LLMが最終回答を出した
+      // ストリーミングで再度呼び出して、チャンクごとに返す
       const streamingLlm = llm.bindTools(tools);
       const stream = await streamingLlm.stream(messages);
 
@@ -117,27 +118,30 @@ export async function ragQuery(question: string): Promise<RagResult> {
       };
     }
 
-    // Process tool calls
+    // LLMがツール呼び出しを要求した → アシスタントの応答を履歴に追加
     messages.push({
       role: "assistant",
       content: typeof response.content === "string" ? response.content : "",
       tool_calls: response.tool_calls,
     });
 
+    // 要求された各ツールを実行する
     for (const toolCall of response.tool_calls) {
+      // ツール名から実行する関数を探す
       const toolFn = tools.find((t) => t.name === toolCall.name);
       if (!toolFn) {
         messages.push({
           role: "tool",
-          content: `Tool ${toolCall.name} not found`,
+          content: `ツール ${toolCall.name} が見つかりません`,
           tool_call_id: toolCall.id ?? "",
         });
         continue;
       }
 
+      // ツールを実行
       const result = await toolFn.invoke(toolCall.args);
 
-      // Track sources from search results
+      // 参照元ドキュメントを記録（UIで「参照:」として表示するため）
       if (toolCall.name === "search_documents") {
         const sourceMatches = String(result).matchAll(/\[([^\]]+\.md)\]/g);
         for (const m of sourceMatches) {
@@ -150,15 +154,17 @@ export async function ragQuery(question: string): Promise<RagResult> {
         }
       }
 
+      // ツール実行結果を履歴に追加（tool_call_idで呼び出しと結果を紐付け）
       messages.push({
         role: "tool",
         content: String(result),
         tool_call_id: toolCall.id ?? "",
       });
     }
+    // ループ先頭に戻り、ツール結果を含む履歴でLLMを再度呼び出す
   }
 
-  // Fallback: max iterations reached
+  // 最大ループ回数に達した場合のフォールバック
   async function* fallback() {
     yield "申し訳ございません。回答の生成に時間がかかりすぎました。質問を変えてお試しください。";
   }
