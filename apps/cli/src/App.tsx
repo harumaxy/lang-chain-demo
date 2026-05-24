@@ -5,6 +5,7 @@ import { Input } from "./components/Input.tsx";
 import { MessageList } from "./components/MessageList.tsx";
 
 interface Message {
+  id: string;
   role: "user" | "assistant";
   content: string;
   sources?: { source: string; content: string }[];
@@ -15,10 +16,17 @@ export function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(input: string) {
-    setMessages((prev) => [...prev, { role: "user", content: input }]);
+    setMessages((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), role: "user", content: input },
+    ]);
     setIsLoading(true);
 
-    setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+    const assistantId = crypto.randomUUID();
+    setMessages((prev) => [
+      ...prev,
+      { id: assistantId, role: "assistant", content: "" },
+    ]);
 
     try {
       let sources: { source: string; content: string }[] = [];
