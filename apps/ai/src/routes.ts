@@ -40,6 +40,7 @@ const app = new Hono()
 
       return streamSSE(c, async (sseStream) => {
         for await (const chunk of stream) {
+          if (!chunk) continue;
           await sseStream.writeSSE({
             data: JSON.stringify({ type: "chunk", content: chunk }),
             event: "message",
