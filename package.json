@@ -2,5 +2,11 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "dev:ai": "cd apps/ai && bun run dev",
+    "dev:front": "cd apps/front && bun run dev",
+    "start:cli": "cd apps/cli && bun run start",
+    "ingest": "cd apps/ai && bun -e \"import { ingestDocuments } from './src/rag/ingest.ts'; await ingestDocuments()\""
+  }
 }
