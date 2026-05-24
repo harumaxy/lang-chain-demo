@@ -99,7 +99,7 @@ export default function App() {
         }}
       >
         <h1 style={{ margin: 0, fontSize: "20px", color: "#1f2937" }}>
-          TechFlow 社内Q&A
+          Example 社内Q&A
         </h1>
         <p style={{ margin: "4px 0 0", fontSize: "13px", color: "#6b7280" }}>
           社内ドキュメントに基づいて回答します

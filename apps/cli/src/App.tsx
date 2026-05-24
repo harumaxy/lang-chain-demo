@@ -79,7 +79,7 @@ export function App() {
   return (
     <Box flexDirection="column" padding={1}>
       <Box borderStyle="single" paddingX={1} marginBottom={1}>
-        <Text bold>TechFlow 社内Q&A (CLI)</Text>
+        <Text bold>Example 社内Q&A (CLI)</Text>
       </Box>
 
       <MessageList messages={messages} />

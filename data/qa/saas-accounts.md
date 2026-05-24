@@ -32,16 +32,16 @@ FigmaはDesign部門が管理しています。利用希望者はDesignチーム
 
 ## Q: 二段階認証（2FA）の設定は必須ですか？
 
-TechFlow株式会社では、GitHub・Google Workspace・Slack・Figmaの全SaaSツールにおいて2FA（二要素認証）の設定が必須です。入社後3営業日以内に設定が完了していない場合、情報システム部よりリマインドが送られます。GitHub OrganizationはOrganizationポリシーにより2FA未設定メンバーは自動的にRemoveされる設定になっています。推奨する認証アプリはGoogle AuthenticatorまたはAuthyです。SMSによる2FAはセキュリティリスクがあるため、可能な限り認証アプリをご利用ください。設定方法に困った場合は#it-supportにてサポートします。
+Example株式会社では、GitHub・Google Workspace・Slack・Figmaの全SaaSツールにおいて2FA（二要素認証）の設定が必須です。入社後3営業日以内に設定が完了していない場合、情報システム部よりリマインドが送られます。GitHub OrganizationはOrganizationポリシーにより2FA未設定メンバーは自動的にRemoveされる設定になっています。推奨する認証アプリはGoogle AuthenticatorまたはAuthyです。SMSによる2FAはセキュリティリスクがあるため、可能な限り認証アプリをご利用ください。設定方法に困った場合は#it-supportにてサポートします。
 
 ---
 
 ## Q: 個人GitHubアカウントを業務に使用してもよいですか？
 
-TechFlow株式会社では業務上のGitHubアクセスに個人アカウントを使用することを許可しています。ただし、業務コードのコミットには必ず会社のメールアドレス（@techflow.co.jp）をGit設定に使用してください（`git config user.email "yourname@techflow.co.jp"`）。個人アカウントのプロフィールにTechFlowへの所属を表示する場合は任意ですが、SNSポリシーに沿った表現をお願いします。会社の機密情報を個人のpublicリポジトリにコミットすることは厳禁です。別途、会社専用アカウントの発行を希望する場合は情報システム部に相談してください。
+Example株式会社では業務上のGitHubアクセスに個人アカウントを使用することを許可しています。ただし、業務コードのコミットには必ず会社のメールアドレス（@techflow.co.jp）をGit設定に使用してください（`git config user.email "yourname@techflow.co.jp"`）。個人アカウントのプロフィールにExampleへの所属を表示する場合は任意ですが、SNSポリシーに沿った表現をお願いします。会社の機密情報を個人のpublicリポジトリにコミットすることは厳禁です。別途、会社専用アカウントの発行を希望する場合は情報システム部に相談してください。
 
 ---
 
 ## Q: Notionのワークスペースへのアクセスはどのようにリクエストしますか？
 
-NotionはGoogle Workspaceアカウント（@techflow.co.jp）でのSSOログインが設定されています。初回ログイン時はNotion（https://notion.so）にアクセスし、「Googleでログイン」を選択してください。自動的にTechFlowワークスペースに参加できます。特定のページやデータベースへのアクセス権限が必要な場合は、そのページのオーナーまたは所属チームのマネージャーに#notionチャンネルで依頼してください。ゲストとして外部メンバーをNotionに招待する際は、情報システム部の承認が必要です。
+NotionはGoogle Workspaceアカウント（@techflow.co.jp）でのSSOログインが設定されています。初回ログイン時はNotion（https://notion.so）にアクセスし、「Googleでログイン」を選択してください。自動的にExampleワークスペースに参加できます。特定のページやデータベースへのアクセス権限が必要な場合は、そのページのオーナーまたは所属チームのマネージャーに#notionチャンネルで依頼してください。ゲストとして外部メンバーをNotionに招待する際は、情報システム部の承認が必要です。

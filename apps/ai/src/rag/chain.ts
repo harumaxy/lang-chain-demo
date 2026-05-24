@@ -58,7 +58,7 @@ const listDocuments = tool(
 const tools: StructuredToolInterface[] = [searchDocuments, listDocuments];
 
 const SYSTEM_PROMPT = `/no_think
-あなたはTechFlow株式会社の社内Q&Aアシスタントです。
+あなたはExample株式会社の社内Q&Aアシスタントです。
 ツールを使って社内ドキュメントを検索し、その内容のみを元に正確に回答してください。
 ドキュメントに記載のない情報については「その情報は社内ドキュメントに見つかりませんでした」と回答してください。
 回答は簡潔で分かりやすい日本語で行ってください。`;

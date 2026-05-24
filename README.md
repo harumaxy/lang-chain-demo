@@ -1,6 +1,6 @@
-# LangChain RAG Demo - TechFlow社内Q&A
+# LangChain RAG Demo - Example社内Q&A
 
-LangChain.jsを使ったRAG（Retrieval Augmented Generation）のデモアプリケーション。架空のソフトウェア開発企業「TechFlow株式会社」の社内Q&Aに自然言語で質問応答できます。
+LangChain.jsを使ったRAG（Retrieval Augmented Generation）のデモアプリケーション。架空のソフトウェア開発企業「Example株式会社」の社内Q&Aに自然言語で質問応答できます。
 
 ## アーキテクチャ
 
